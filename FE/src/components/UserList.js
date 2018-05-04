@@ -31,18 +31,30 @@ const TableExampleSimple = (props) => {
     props.history.push('/admin/adduser');
   }
 
+  const style = {
+    tableStyle: {
+      background: '#666'
+    },
+    tableHeaderTextColor: {
+      color: 'white'
+    }, 
+    tableContentColor : {
+      color: 'white'
+    }
+  }
+
   return (
-    <Table selectable={false}>
+    <Table selectable={false} style={style.tableStyle}>
       <TableHeader displaySelectAll={false}
         adjustForCheckbox={false}>
         <TableRow>
-          <TableHeaderColumn>ID</TableHeaderColumn>
-          <TableHeaderColumn>First name</TableHeaderColumn>
-          <TableHeaderColumn>Last name</TableHeaderColumn>
-          <TableHeaderColumn>City</TableHeaderColumn>
-          <TableHeaderColumn>State</TableHeaderColumn>
-          <TableHeaderColumn>Country</TableHeaderColumn>
-          <TableHeaderColumn>Action</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>ID</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>First name</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>Last name</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>City</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>State</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>Country</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>Action</TableHeaderColumn>
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
@@ -50,15 +62,15 @@ const TableExampleSimple = (props) => {
           props.userListWrap.map((user, index) => {
             return (
               <TableRow key={index}>
-                <TableRowColumn>{user.id}</TableRowColumn>
-                <TableRowColumn>{user.firstName}</TableRowColumn>
-                <TableRowColumn>{user.lastName}</TableRowColumn>
-                <TableRowColumn>{user.city}</TableRowColumn>
-                <TableRowColumn>{user.state}</TableRowColumn>
-                <TableRowColumn>{user.country}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.id}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.firstName}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.lastName}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.city}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.state}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{user.country}</TableRowColumn>
                 <TableRowColumn>
                   <IconButton touch={true} onClick={event => editUserDetail(user)}>
-                    <FontIcon className="fa fa-edit" color='#e02222' />
+                    <FontIcon className="fa fa-edit" color='#00BCD4' />
                   </IconButton>
                   <IconButton touch={true} onClick={event => deleteUserDetail(user.id)}>
                     <FontIcon className="fa fa-remove" color='#e02222' />
@@ -108,7 +120,7 @@ class UserList extends React.Component {
   render() {
     return (
       <div>
-        <Link to={`/admin/adduser`}><RaisedButton label="Add User" primary={true}/></Link>
+        <Link to={`/admin/adduser`}><RaisedButton label="Add User" style={{marginTop: '10px'}} primary={true}/></Link>
         <Field name="searchInput" label="Search Name" component={FormControl} onChange={(element, searchKey) =>
           this.setState({ searchKey: searchKey.toLowerCase() })} />
         <TableExampleSimple userListWrap={this.searchResult()} {...this.props} />

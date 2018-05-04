@@ -45,15 +45,30 @@ class SideBar extends Component {
   }
 
   render() {
+    const style = {
+      backgroundStyle: {
+        background: '#333',
+        color: '#FFF'
+      },
+      drawerStyle: {
+        background: 'cadetblue',
+      },
+      menuItemStyle : {
+        color: 'white'
+      }
+    }
+
     return (
       <div>
         <Drawer
           docked={false}
           width={200}
           open={this.state.open}
-          onRequestChange={(open) => this.setState({ open })}>
+          onRequestChange={(open) => this.setState({ open })}
+          containerStyle={style.drawerStyle}
+        >
           {menu.map((menu, index) =>
-            <MenuItem key={index} onClick={this.changeRoute.bind(this, menu)}>{menu.title}</MenuItem>
+            <MenuItem key={index} style={style.menuItemStyle} onClick={this.changeRoute.bind(this, menu)}>{menu.title}</MenuItem>
           )}
         </Drawer>
         <AppBar
@@ -61,6 +76,7 @@ class SideBar extends Component {
           onLeftIconButtonClick={e => this.setState({ open: !this.state.open })}
           iconElementLeft={this.state.open ? <IconButton><NavigationClose /></IconButton> : null}
           iconElementRight={<PopOverMenu logout={this.onLogout.bind(this)} />}
+          style={style.backgroundStyle}
         />
       </div>
     );

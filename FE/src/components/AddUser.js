@@ -124,10 +124,10 @@ class AddUser extends React.Component {
                     <br />
                     <FieldArray name="userSkills" component={renderSkill} />
                     <br />
-                    <RaisedButton type="submit" label="Save User" primary={true} />
-                    <br />
-                    <br />
-                    <Link to={`/admin`}><RaisedButton label="User list" primary={true}/></Link>
+                    <div style={{textAlign: 'center'}}>
+                        <RaisedButton type="submit" label="Save User" primary={true} />
+                        <Link to={`/admin`} style={{ marginLeft: '50px' }}><RaisedButton label="User list" primary={true} /></Link>
+                    </div>
                 </form>
             </div>
         );
@@ -140,34 +140,34 @@ const validate = values => {
     var urlRegex = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
     if (!values.firstName) {
         errors.firstName = "Please enter first name";
-    } 
+    }
     if (!values.lastName) {
         errors.lastName = "Please enter last name";
-    } 
+    }
     if (values.city && values.city.length > 20) {
         errors.city = 'City name not be more than 20 character';
-    } 
+    }
     if (values.state && values.state.length > 20) {
         errors.state = 'State name not be more than 20 character';
-    } 
+    }
     if (values.country && values.country.length > 50) {
         errors.country = 'Country name not be more than 50 character';
-    } 
+    }
     if (values.company && values.company.length > 150) {
         errors.company = 'Company name not be more than 150 character';
-    } 
+    }
     if (values.linkdinUrl && (!urlRegex.test(values.linkdinUrl) || values.linkdinUrl.length > 100)) {
         errors.linkdinUrl = 'Please provide a valid Linkdin URL not be more than 100 character';
-    } 
+    }
     if (values.portfolioUrl && (!urlRegex.test(values.portfolioUrl) || values.portfolioUrl.length > 100)) {
         errors.portfolioUrl = 'Please provide a valid Portfolio URL not be more than 100 character';
-    } 
+    }
     if (values.skillName && values.skillName.length > 30) {
         errors.skillName = 'Skill name not be more than 30 character';
-    } 
+    }
     if (values.sampleCodeUrl && values.sampleCodeUrl.length > 100) {
         errors.sampleCodeUrl = 'Sample code URL not be more than 100 character';
-    } 
+    }
     if (values.gitRepositoryUrl && values.gitRepositoryUrl.length > 100) {
         errors.gitRepositoryUrl = 'Git repository URL not be more than 100 character';
     }
