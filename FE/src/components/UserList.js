@@ -17,11 +17,15 @@ import { Link } from 'react-router-dom';
 import { fetchUserList, deleteUser, editUser } from '../actions/UserAction';
 import { FormControl } from './common/FormControl';
 
+// Functional component for table
 const TableExampleSimple = (props) => {
+
+  // Delete user detail callback
   const deleteUserDetail = (userId) => {
     props.deleteUser(userId, (response) => alert(response.message));
   }
 
+  // Edit user detail callback
   const editUserDetail = (userDetail) => {
     props.editUser(userDetail);
     props.history.push('/admin/adduser');
@@ -69,6 +73,7 @@ const TableExampleSimple = (props) => {
   )
 };
 
+// User list component for listing user details
 class UserList extends React.Component {
 
   constructor(props) {
@@ -78,6 +83,7 @@ class UserList extends React.Component {
     };
   }
 
+  // React life method
   componentWillMount() {
     if (localStorage.getItem("username") === null) {
       this.props.history.replace('/');
@@ -86,8 +92,7 @@ class UserList extends React.Component {
     this.props.fetchUserList();
   }
 
-
-
+  // Search input hadler method
   searchResult() {
     const { searchKey } = this.state;
     const { userList } = this.props;
@@ -112,6 +117,7 @@ class UserList extends React.Component {
   }
 }
 
+// callback to provide redux state as props in component
 const mapStateToProps = (state) => {
   return {
     userList: state.userList,
@@ -119,6 +125,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+// callback for redux action
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchUserList, deleteUser, editUser }, dispatch);
 }

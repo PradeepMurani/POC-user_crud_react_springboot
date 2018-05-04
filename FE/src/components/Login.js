@@ -4,13 +4,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Field, reduxForm } from 'redux-form'
 import { FormControl } from './common/FormControl';
 
+// Class based Login component
 class Login extends React.Component {
 
+  // Submit login callback
   submitLogin(data) {
     localStorage.setItem("username", data.email);
     this.props.history.replace('/admin');
   }
 
+  // React life cycly method
   componentWillMount() {
     if(localStorage.getItem("username") !== null) {
       this.props.history.replace('/admin');
@@ -35,6 +38,7 @@ class Login extends React.Component {
   }
 }
 
+// Login form validation callback
 const validate = values => {
   const errors = {};
   if (!values.email) {

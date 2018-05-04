@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+// All Action constants
 export const FETCH_USER_LIST = 'FETCH_USER_LIST';
 export const DELETE_USER = 'DELETE_USER';
 export const SAVE_OR_UPDATE_USER = 'SAVE_OR_UPDATE_USER';
 export const EDIT_USER = "EDIT_USER";
 
+// Root url constant
 const ROOT_URL = "http://localhost:8080/user";
 
 // Action to fetch user listing
@@ -52,6 +54,7 @@ export const saveOrUpdateUser = (userDetail, callback) => {
     }
 }
 
+// Action to edit user details
 export const editUser = (userDetail) => {
     return {
         type: EDIT_USER,

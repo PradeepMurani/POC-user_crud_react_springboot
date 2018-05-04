@@ -4,6 +4,7 @@ import {
     EDIT_USER 
 }  from '../actions/UserAction';
 
+// Fetch and delete user reducer
 export const fetchUserListReducer = (state = [], action) => {
     switch(action.type) {
         case FETCH_USER_LIST:
@@ -15,6 +16,7 @@ export const fetchUserListReducer = (state = [], action) => {
     }
 }
 
+// Edit user reducer
 export const editUser = (state = {}, action) => {
     switch(action.type) {
         case EDIT_USER:

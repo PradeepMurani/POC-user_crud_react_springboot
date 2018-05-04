@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { saveOrUpdateUser } from '../actions/UserAction';
 
+// Functional component for User skills
 const renderSkill = ({ fields, meta: { error, submitFailed } }) => (
     <div>
         <RaisedButton label="Add Skill" onClick={() => fields.push({})} />
@@ -75,8 +76,10 @@ const renderSkill = ({ fields, meta: { error, submitFailed } }) => (
     </div>
 )
 
+// Add User class based component
 class AddUser extends React.Component {
 
+    // Submit form callback
     submitForm(data) {
         this.props.saveOrUpdateUser(data, (response) => {
             alert(response.message);
@@ -84,6 +87,7 @@ class AddUser extends React.Component {
         });
     }
 
+    // Life cycle hook of react application
     componentWillMount() {
         if (localStorage.getItem("username") === null) {
             this.props.history.replace('/');
@@ -130,32 +134,43 @@ class AddUser extends React.Component {
     }
 }
 
+// Form validation callback for redux form
 const validate = values => {
     const errors = {};
-    if (values.firstName === undefined) {
+    var urlRegex = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+    if (!values.firstName) {
         errors.firstName = "Please enter first name";
-    } else if (values.lastName === undefined) {
+    } 
+    if (!values.lastName) {
         errors.lastName = "Please enter last name";
-    } else if (values.city && values.city.length > 20) {
+    } 
+    if (values.city && values.city.length > 20) {
         errors.city = 'City name not be more than 20 character';
-    } else if (values.state && values.state.length > 20) {
+    } 
+    if (values.state && values.state.length > 20) {
         errors.state = 'State name not be more than 20 character';
-    } else if (values.country && values.country.length > 50) {
+    } 
+    if (values.country && values.country.length > 50) {
         errors.country = 'Country name not be more than 50 character';
-    } else if (values.company && values.company.length > 150) {
+    } 
+    if (values.company && values.company.length > 150) {
         errors.company = 'Company name not be more than 150 character';
-    } else if (values.linkdinUrl && values.linkdinUrl.length > 100) {
-        errors.linkdinUrl = 'Linkdin URL not be more than 100 character';
-    } else if (values.portfolioUrl && values.portfolioUrl.length > 100) {
-        errors.portfolioUrl = 'Portfolio URL not be more than 100 character';
-    } else if (values.skillName && values.skillName.length > 30) {
+    } 
+    if (values.linkdinUrl && (!urlRegex.test(values.linkdinUrl) || values.linkdinUrl.length > 100)) {
+        errors.linkdinUrl = 'Please provide a valid Linkdin URL not be more than 100 character';
+    } 
+    if (values.portfolioUrl && (!urlRegex.test(values.portfolioUrl) || values.portfolioUrl.length > 100)) {
+        errors.portfolioUrl = 'Please provide a valid Portfolio URL not be more than 100 character';
+    } 
+    if (values.skillName && values.skillName.length > 30) {
         errors.skillName = 'Skill name not be more than 30 character';
-    } else if (values.sampleCodeUrl && values.sampleCodeUrl.length > 100) {
+    } 
+    if (values.sampleCodeUrl && values.sampleCodeUrl.length > 100) {
         errors.sampleCodeUrl = 'Sample code URL not be more than 100 character';
-    } else if (values.gitRepositoryUrl && values.gitRepositoryUrl.length > 100) {
+    } 
+    if (values.gitRepositoryUrl && values.gitRepositoryUrl.length > 100) {
         errors.gitRepositoryUrl = 'Git repository URL not be more than 100 character';
     }
-
     return errors;
 }
 
