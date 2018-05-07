@@ -6,7 +6,7 @@ export const FormControl = ({
     input,
     label,
     type,
-    meta: { touched, error, warning }
+    meta: { touched, error }
   }) => (
     <TextField
       hintText={`Enter your ${label}`}

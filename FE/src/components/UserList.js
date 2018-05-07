@@ -48,7 +48,7 @@ const TableExampleSimple = (props) => {
       <TableHeader displaySelectAll={false}
         adjustForCheckbox={false}>
         <TableRow>
-          <TableHeaderColumn style={style.tableHeaderTextColor}>ID</TableHeaderColumn>
+          <TableHeaderColumn style={style.tableHeaderTextColor}>#</TableHeaderColumn>
           <TableHeaderColumn style={style.tableHeaderTextColor}>First name</TableHeaderColumn>
           <TableHeaderColumn style={style.tableHeaderTextColor}>Last name</TableHeaderColumn>
           <TableHeaderColumn style={style.tableHeaderTextColor}>City</TableHeaderColumn>
@@ -62,7 +62,7 @@ const TableExampleSimple = (props) => {
           props.userListWrap.map((user, index) => {
             return (
               <TableRow key={index}>
-                <TableRowColumn style={style.tableContentColor}>{user.id}</TableRowColumn>
+                <TableRowColumn style={style.tableContentColor}>{index + 1}</TableRowColumn>
                 <TableRowColumn style={style.tableContentColor}>{user.firstName}</TableRowColumn>
                 <TableRowColumn style={style.tableContentColor}>{user.lastName}</TableRowColumn>
                 <TableRowColumn style={style.tableContentColor}>{user.city}</TableRowColumn>

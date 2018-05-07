@@ -84,7 +84,9 @@ class AddUser extends React.Component {
         this.props.saveOrUpdateUser(data, (response) => {
             alert(response.message);
             this.props.reset();
+            this.props.history.replace('/admin');
         });
+        
     }
 
     // Life cycle hook of react application
@@ -96,7 +98,7 @@ class AddUser extends React.Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, initialValues = {} } = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
@@ -125,7 +127,7 @@ class AddUser extends React.Component {
                     <FieldArray name="userSkills" component={renderSkill} />
                     <br />
                     <div style={{textAlign: 'center'}}>
-                        <RaisedButton type="submit" label={this.props.editUser === {}? 'Save User' : 'Update User'} primary={true} />
+                        <RaisedButton type="submit" label={initialValues.id ? 'Update User':'Save User' } primary={true} />
                         <Link to={`/admin`} style={{ marginLeft: '50px' }}><RaisedButton label="User list" primary={true} /></Link>
                     </div>
                 </form>
