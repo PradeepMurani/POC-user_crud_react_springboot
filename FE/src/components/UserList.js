@@ -13,9 +13,9 @@ import FontIcon from 'material-ui/FontIcon';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import { fetchUserList, deleteUser, editUser } from '../actions/UserAction';
 import { FormControl } from './common/FormControl';
+import { EDIT_USER } from '../actions/UserAction';
 
 // Functional component for table
 const TableExampleSimple = (props) => {
@@ -28,7 +28,7 @@ const TableExampleSimple = (props) => {
   // Edit user detail callback
   const editUserDetail = (userDetail) => {
     props.editUser(userDetail);
-    props.history.push('/admin/adduser');
+    props.history.replace('/admin/adduser');
   }
 
   const style = {
@@ -117,10 +117,16 @@ class UserList extends React.Component {
     );
   }
 
+  routerToAddUser() {
+    const { dispatch, history} = this.props;
+    dispatch({type: EDIT_USER, payload: {}});
+    history.push('/admin/adduser');
+  }
+
   render() {
     return (
       <div>
-        <Link to={`/admin/adduser`}><RaisedButton label="Add User" style={{marginTop: '10px'}} primary={true}/></Link>
+        <RaisedButton label="Add User" style={{marginTop: '10px'}} primary={true} onClick={this.routerToAddUser.bind(this)}/>
         <Field name="searchInput" label="Search Name" component={FormControl} onChange={(element, searchKey) =>
           this.setState({ searchKey: searchKey.toLowerCase() })} />
         <TableExampleSimple userListWrap={this.searchResult()} {...this.props} />

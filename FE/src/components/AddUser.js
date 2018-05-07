@@ -125,7 +125,7 @@ class AddUser extends React.Component {
                     <FieldArray name="userSkills" component={renderSkill} />
                     <br />
                     <div style={{textAlign: 'center'}}>
-                        <RaisedButton type="submit" label="Save User" primary={true} />
+                        <RaisedButton type="submit" label={this.props.editUser === {}? 'Save User' : 'Update User'} primary={true} />
                         <Link to={`/admin`} style={{ marginLeft: '50px' }}><RaisedButton label="User list" primary={true} /></Link>
                     </div>
                 </form>

@@ -6,6 +6,9 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Drawer from 'material-ui/Drawer';
+import { connect } from 'react-redux';
+import { EDIT_USER } from '../actions/UserAction';
+
 
 // Functional component for PopOverMenu
 const PopOverMenu = ({ logout }) => <IconMenu
@@ -33,8 +36,10 @@ class SideBar extends Component {
 
   // callback to change the router
   changeRoute(menu) {
-    this.setState({ open: false })
-    this.props.history.push(this.props.match.url + menu.route);
+    this.setState({ open: false });
+    const { dispatch, history} = this.props;
+    dispatch({type: EDIT_USER, payload: {}});
+    history.replace(this.props.match.url + menu.route);
     this.setState({ title: menu.title });
   }
 
@@ -83,4 +88,5 @@ class SideBar extends Component {
   }
 }
 
-export default SideBar;
+
+export default connect()(SideBar);
